@@ -1247,6 +1247,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-free@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "@fortawesome/fontawesome-free@npm:6.1.1"
+  checksum: adb3c71e0d9e60488401a193cfd1925ad100935ae41c88d3969937b59c182289ecc6f8c0835f0a3fb9cc215348a047a39536e918247381774baf7dcebef94b64
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -1352,6 +1359,13 @@ __metadata:
   peerDependencies:
     webpack: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
   checksum: 66800b238f70de14bf2f6a493853025f619e95319ebeb5ad36edbdc64b876992724b16122d1b5239663983516dd4a3e73b10d1f523c11777d82e1d52afd23087
+  languageName: node
+  linkType: hard
+
+"@popperjs/core@npm:^2.11.4":
+  version: 2.11.4
+  resolution: "@popperjs/core@npm:2.11.4"
+  checksum: 36168d274aa164368a50aef2e7b2f858e1b9145d9250af9dc1315ff719d874a367177760f8285efb75c8cf48267194a50e7dc9cdb41bf0b1958c38805c13564c
   languageName: node
   linkType: hard
 
@@ -2252,6 +2266,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^0.26.1":
+  version: 0.26.1
+  resolution: "axios@npm:0.26.1"
+  dependencies:
+    follow-redirects: ^1.14.8
+  checksum: d9eb58ff4bc0b36a04783fc9ff760e9245c829a5a1052ee7ca6013410d427036b1d10d04e7380c02f3508c5eaf3485b1ae67bd2adbfec3683704745c8d7a6e1a
+  languageName: node
+  linkType: hard
+
 "babel-loader@npm:^8.2.2":
   version: 8.2.4
   resolution: "babel-loader@npm:8.2.4"
@@ -2376,6 +2399,15 @@ __metadata:
   version: 1.0.0
   resolution: "boolbase@npm:1.0.0"
   checksum: 3e25c80ef626c3a3487c73dbfc70ac322ec830666c9ad915d11b701142fab25ec1e63eff2c450c74347acfd2de854ccde865cd79ef4db1683f7c7b046ea43bb0
+  languageName: node
+  linkType: hard
+
+"bootstrap@npm:^5.1.3":
+  version: 5.1.3
+  resolution: "bootstrap@npm:5.1.3"
+  peerDependencies:
+    "@popperjs/core": ^2.10.2
+  checksum: 301b5ed872efba061104cf22ac93568e3837867fb5527ab9326a51510fb752bd4883e1d488225c8be72f86d9d3a55ef5b166aa7fa62c2fdd077c3f05b65752f8
   languageName: node
   linkType: hard
 
@@ -3648,13 +3680,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.8":
   version: 1.14.9
   resolution: "follow-redirects@npm:1.14.9"
   peerDependenciesMeta:
     debug:
       optional: true
   checksum: f5982e0eb481818642492d3ca35a86989c98af1128b8e1a62911a3410621bc15d2b079e8170b35b19d3bdee770b73ed431a257ed86195af773771145baa57845
+  languageName: node
+  linkType: hard
+
+"fontawesome@npm:^5.6.3":
+  version: 5.6.3
+  resolution: "fontawesome@npm:5.6.3"
+  checksum: f5d4ec78d9663d69d652b4f6d0fcb37f3c37a5067ce37ffd169a61d8183ccd9467206fd2990ee229944f1704ea71932e21dc081398edd0bbe354501ee6619634
   languageName: node
   linkType: hard
 
@@ -6054,10 +6093,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@fortawesome/fontawesome-free": ^6.1.1
     "@hotwired/stimulus": ^3.0.0
+    "@popperjs/core": ^2.11.4
     "@symfony/stimulus-bridge": ^3.0.0
     "@symfony/webpack-encore": ^1.7.0
+    axios: ^0.26.1
+    bootstrap: ^5.1.3
     core-js: ^3.0.0
+    fontawesome: ^5.6.3
     regenerator-runtime: ^0.13.2
     sass: ^1.49.11
     sass-loader: ^12.0.0
