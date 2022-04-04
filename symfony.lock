@@ -83,6 +83,12 @@
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
+    "pagerfanta/core": {
+        "version": "v3.6.1"
+    },
+    "pagerfanta/doctrine-orm-adapter": {
+        "version": "v3.6.1"
+    },
     "psr/cache": {
         "version": "3.0.0"
     },
