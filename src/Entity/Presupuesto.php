@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Presupuesto
  *
  * @ORM\Table(name="presupuesto", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_1B6368D33C2672C8F15A1987", columns={"obra_id", "partida_id"})}, indexes={@ORM\Index(name="IDX_1B6368D33C2672C8", columns={"obra_id"}), @ORM\Index(name="IDX_1B6368D3F15A1987", columns={"partida_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PresupuestoRepository")
  */
 class Presupuesto
 {

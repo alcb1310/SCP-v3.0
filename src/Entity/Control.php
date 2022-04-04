@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Control
  *
  * @ORM\Table(name="control", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_EDDB2C4B3C2672C8F15A19871A8B7D9", columns={"obra_id", "partida_id", "fecha"})}, indexes={@ORM\Index(name="IDX_EDDB2C4B3C2672C8", columns={"obra_id"}), @ORM\Index(name="IDX_EDDB2C4BF15A1987", columns={"partida_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ControlRepository")
  */
 class Control
 {

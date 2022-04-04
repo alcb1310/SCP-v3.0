@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Actual
  *
  * @ORM\Table(name="actual", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_227D9A243C2672C8F15A1987", columns={"obra_id", "partida_id"})}, indexes={@ORM\Index(name="IDX_227D9A243C2672C8", columns={"obra_id"}), @ORM\Index(name="IDX_227D9A24F15A1987", columns={"partida_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ActualRepository")
  */
 class Actual
 {

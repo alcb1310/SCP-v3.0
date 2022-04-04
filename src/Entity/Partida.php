@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Partida
  *
  * @ORM\Table(name="partida", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_A9C1580C20332D99", columns={"codigo"}), @ORM\UniqueConstraint(name="UNIQ_A9C1580C3A909126", columns={"nombre"})}, indexes={@ORM\Index(name="IDX_A9C1580C613CEC58", columns={"padre_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PartidaRepository")
  */
 class Partida
 {

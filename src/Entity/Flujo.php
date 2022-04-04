@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Flujo
  *
  * @ORM\Table(name="flujo", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_B18568143C2672C8F15A19871A8B7D9", columns={"obra_id", "partida_id", "fecha"})}, indexes={@ORM\Index(name="IDX_B18568143C2672C8", columns={"obra_id"}), @ORM\Index(name="IDX_B1856814F15A1987", columns={"partida_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\FlujoRepository")
  */
 class Flujo
 {

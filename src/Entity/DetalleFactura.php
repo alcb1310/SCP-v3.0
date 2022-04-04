@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * DetalleFactura
  *
  * @ORM\Table(name="detalle_factura", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_B1354EA1F04F795FF15A1987", columns={"factura_id", "partida_id"})}, indexes={@ORM\Index(name="IDX_B1354EA1F04F795F", columns={"factura_id"}), @ORM\Index(name="IDX_B1354EA1F15A1987", columns={"partida_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\DetalleFacturaRepository")
  */
 class DetalleFactura
 {
