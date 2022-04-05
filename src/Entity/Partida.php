@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Partida
@@ -10,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="partida", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_A9C1580C20332D99", columns={"codigo"}), @ORM\UniqueConstraint(name="UNIQ_A9C1580C3A909126", columns={"nombre"})}, indexes={@ORM\Index(name="IDX_A9C1580C613CEC58", columns={"padre_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\PartidaRepository")
  */
+#[UniqueEntity(
+    fields:['codigo'],
+    errorPath:'codigo',
+    message:'Codigo de partida ya existe'
+)]
+#[UniqueEntity(
+    fields:['nombre'],
+    errorPath:'nombre',
+    message:'Nombre de partida ya existe'
+)]
 class Partida
 {
     /**

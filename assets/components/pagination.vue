@@ -46,9 +46,6 @@ export default {
       pages: [],
     };
   },
-  created() {
-    this.getPages;
-  },
   computed: {
     enableActive() {
       return this.currentPage - 1;
@@ -61,11 +58,13 @@ export default {
   },
   watch: {
     maxPages() {
-      console.log("pages");
+      const pages = [];
       for (let i = 0; i < this.maxPages; i++) {
         let b = i + 1;
-        this.pages.push(b);
+        pages.push(b);
       }
+
+      this.pages = pages;
     },
   },
 };

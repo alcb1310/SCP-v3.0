@@ -21,28 +21,13 @@ class PartidaRepository extends ServiceEntityRepository
         parent::__construct($registry, Partida::class);
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function add(Partida $entity, bool $flush = true): void
+    public function getAllAcumula()
     {
-        $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
-
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function remove(Partida $entity, bool $flush = true): void
-    {
-        $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.acumula = true')
+            ->addOrderBy('p.codigo')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
