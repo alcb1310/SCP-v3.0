@@ -9,3 +9,7 @@ export function getAllProveedores(page) {
     params: { page },
   });
 }
+
+export function getProveedor(id) {
+  return axios.get(`/api/proveedores/${id}`);
+}

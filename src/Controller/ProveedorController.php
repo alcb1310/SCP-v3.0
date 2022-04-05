@@ -40,6 +40,20 @@ class ProveedorController extends AbstractController
 
         return new JsonResponse($responseArray);
     }
+
+    #[Route('/api/proveedores/{id}')]
+    public function getProveedor($id, ProveedorRepository $proveedorRepository)
+    {
+        $proveedor = $proveedorRepository->findOneBy(['id' => $id]);
+        $helper['id'] = $proveedor->getId();
+        $helper['ruc'] = $proveedor->getRuc();
+        $helper['nombre'] = $proveedor->getNombre();
+        $helper['contacto'] = $proveedor->getContacto();
+        $helper['telefono'] = $proveedor->getTelefono();
+        $helper['email'] = $proveedor->getEmail();
+
+        return new JsonResponse($helper);
+    }
     
     /**
      * makeArray

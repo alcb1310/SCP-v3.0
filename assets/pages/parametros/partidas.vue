@@ -211,6 +211,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
+                data-bs-dismiss="modal"
                 @click.prevent="grabarPartida"
               >
                 Grabar
@@ -269,7 +270,6 @@ export default {
       loading: false,
       error: [],
       success: "",
-      myModal: null,
     };
   },
   created() {
@@ -330,7 +330,6 @@ export default {
       this.totalPages = partidas.data.total_pages;
       this.currentPage = parseInt(partidas.data.current);
       this.loading = false;
-      this.myModal.modal("hide");
     },
     cierraModal() {
       this.selectedPartida = {
@@ -373,16 +372,6 @@ export default {
       this.method = 2;
 
       this.loading = false;
-    },
-    openModal() {
-      this.myModal = new bootstrap.Modal(
-        document.getElementById("partidasModal"),
-        {
-          keyboard: false,
-          backdrop: true,
-        }
-      );
-      this.myModal.show();
     },
   },
   computed: {
