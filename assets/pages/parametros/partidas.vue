@@ -1,5 +1,6 @@
 <template>
   <div>
+    <flash-message></flash-message>
     <div class="row">
       <div class="col-md-8 offset-md-2 border shadow">
         <div class="row mt-3 mb-3">
@@ -44,6 +45,7 @@
                 <tr
                   v-for="partida in partidas"
                   :key="partida.id"
+                  :id="partida.id"
                   @click="selecciona(partida.id)"
                   data-bs-toggle="modal"
                   data-bs-target="#partidasModal"
@@ -68,7 +70,6 @@
     <div
       class="modal fade"
       id="partidasModal"
-      data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"
       aria-labelledby="staticBackdropLabel"
@@ -110,6 +111,7 @@
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                @click="cierraModal"
               ></button>
             </div>
             <div class="modal-body">
@@ -211,7 +213,6 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                data-bs-dismiss="modal"
                 @click.prevent="grabarPartida"
               >
                 Grabar
@@ -243,11 +244,14 @@ import {
 import Pagination from "../../components/pagination.vue";
 import Loading from "../../components/loading.vue";
 
+import FlashMessage from "vue-flash-message";
+
 export default {
   name: "Partidas",
   components: {
     Pagination,
     Loading,
+    FlashMessage,
   },
   data() {
     return {
@@ -304,6 +308,7 @@ export default {
       return hasErrors;
     },
     async grabarPartida() {
+      let success = true;
       if (this.isInvalid()) {
         return;
       }
@@ -312,23 +317,17 @@ export default {
       try {
         if (this.method === 1) {
           const result = await add(this.selectedPartida);
-          this.success = "Partida creada satisfactoriamente";
         } else {
           const result = await edit(this.selectedPartida);
-          this.cierraModal();
-          this.success = "Partida actualizada satisfactoriamente";
         }
+
         // this.result = result;
       } catch (err) {
         // console.error(err);
         this.error = err.response.data;
+        success = false;
       }
-      const partidas = await getAllPartidas(this.currentPage);
-      this.partidas = partidas.data.results;
-      this.hasPrevious = partidas.data.has_previous;
-      this.hasNext = partidas.data.has_next;
-      this.totalPages = partidas.data.total_pages;
-      this.currentPage = parseInt(partidas.data.current);
+      this.queryData(this.currentPage);
       this.loading = false;
     },
     cierraModal() {

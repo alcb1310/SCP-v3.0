@@ -96,6 +96,7 @@
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                @click="cierraModal"
               ></button>
             </div>
             <div class="modal-body">
@@ -184,7 +185,9 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-primary">Grabar</button>
+              <button class="btn btn-primary" @click.prevent="grabaProveedor">
+                Grabar
+              </button>
               <button
                 type="button"
                 class="btn btn-secondary"
@@ -203,7 +206,12 @@
 
 <script>
 // Importing all scripts
-import { getAllProveedores, getProveedor } from "../../services/proveedor";
+import {
+  getAllProveedores,
+  getProveedor,
+  addProveedor,
+  editProveedor,
+} from "../../services/proveedor";
 
 //Importing all components
 import Pagination from "../../components/pagination.vue";
@@ -248,6 +256,61 @@ export default {
     },
   },
   methods: {
+    isInvalid() {
+      let valid = false;
+      if (
+        this.selectedProveedor.ruc === "" ||
+        this.selectedProveedor.ruc === null ||
+        this.selectedProveedor.ruc.length < 10 ||
+        this.selectedProveedor.ruc.length > 13
+      ) {
+        this.error.ruc = "Ingrese un numero de RUC valido";
+        valid = true;
+      }
+      if (
+        this.selectedProveedor.nombre === "" ||
+        this.selectedProveedor.nombre === null
+      ) {
+        this.error.nombre = "Ingrese el nombre";
+        valid = true;
+      }
+
+      return valid;
+    },
+    async grabaProveedor() {
+      this.loading = true;
+      this.error = [];
+      if (this.isInvalid()) {
+        return;
+      }
+      try {
+        if (this.method === 1) {
+          const result = await addProveedor(this.selectedProveedor);
+          this.success = "Proveedor creado exitosamente";
+        } else {
+          const result = await editProveedor(this.selectedProveedor);
+          this.success = "Proveedor actualizado exitosamente";
+        }
+        console.log(result);
+      } catch (err) {
+        if ("response" in err) {
+          if ("data" in err.response) {
+            if ("ruc" in err.response.data) {
+              this.error.ruc = err.response.data.ruc;
+            }
+            if ("nombre" in err.response.data) {
+              this.error.nombre = err.response.data.nombre;
+            }
+            console.debug(err.response.data);
+          } else {
+            console.debug(err.response);
+          }
+        } else {
+          console.debug(err);
+        }
+      }
+      this.loading = false;
+    },
     async selecciona(id) {
       this.loading = true;
       const result = await getProveedor(id);

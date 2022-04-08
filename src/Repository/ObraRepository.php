@@ -21,28 +21,12 @@ class ObraRepository extends ServiceEntityRepository
         parent::__construct($registry, Obra::class);
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function add(Obra $entity, bool $flush = true): void
+    public function getAllActive()
     {
-        $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
-
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function remove(Obra $entity, bool $flush = true): void
-    {
-        $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.activo = true')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
