@@ -109,7 +109,7 @@ class ObraApiController extends AbstractController
      * @param  Obra $obra
      * @return array
      */
-    private function makeArrayFromOne($obra): array
+    public function makeArrayFromOne($obra): array
     {
         if ($obra === null){
             return null;
