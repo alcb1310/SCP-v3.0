@@ -22,7 +22,7 @@ class ProveedorController extends AbstractController
         $proveedores = $proveedorRepository->findBy(array(), array('nombre' => 'ASC'));
 
         $proveedorArray = $this->makeArray($proveedores);
-       
+
         $adapter = new ArrayAdapter($proveedorArray);
         $pagerfanta = new Pagerfanta($adapter);
         $pagerfanta->setMaxPerPage(15);
@@ -54,7 +54,7 @@ class ProveedorController extends AbstractController
         return new JsonResponse($proveedorJson);
     }
 
-    #[Route('/api/proveedores-add', methods:'POST')]
+    #[Route('/api/proveedores', methods:'POST')]
     public function addProveedor(Request $request, ProveedorRepository $proveedorRepository, EntityManagerInterface $em): Response
     {
         try {
@@ -85,7 +85,7 @@ class ProveedorController extends AbstractController
         }
     }
 
-    #[Route('/api/proveedores-edit/{id}', methods:'POST')]
+    #[Route('/api/proveedores/{id}', methods:'PUT')]
     public function editProveedor($id, Request $request, ProveedorRepository $proveedorRepository, EntityManagerInterface $em): Response
     {
         try{
@@ -115,7 +115,7 @@ class ProveedorController extends AbstractController
             return new JsonResponse($error, 400);
         }
     }
-    
+
     /**
      * makeArrayFromOne
      *
@@ -137,7 +137,7 @@ class ProveedorController extends AbstractController
 
         return $helper;
     }
-    
+
     /**
      * makeArray
      *
@@ -147,7 +147,7 @@ class ProveedorController extends AbstractController
     private function makeArray($proveedores): array
     {
         $proveedorArray = array();
-        
+
         foreach ($proveedores as $proveedor){
             $helper = $this->makeArrayFromOne($proveedor);
 

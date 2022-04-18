@@ -33,7 +33,7 @@ export function addProveedor(proveedor) {
   params.append("telefono", proveedor.telefono);
   params.append("email", proveedor.email);
 
-  return axios.post("/api/proveedores-add", params);
+  return axios.post("/api/proveedores", params);
 }
 
 /**
@@ -49,5 +49,5 @@ export function editProveedor(proveedor) {
   params.append("telefono", proveedor.telefono);
   params.append("email", proveedor.email);
 
-  return axios.post(`/api/proveedores-edit/${proveedor.id}`, params);
+  return axios.put(`/api/proveedores/${proveedor.id}`, params);
 }
