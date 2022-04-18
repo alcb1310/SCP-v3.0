@@ -23,7 +23,7 @@ export function addObra(obra) {
   params.append("casas", obra.casas);
   params.append("activo", obra.activo);
 
-  return axios.post("/api/obras-add", params);
+  return axios.post("/api/obras", params);
 }
 
 export function editObra(obra) {
@@ -32,5 +32,13 @@ export function editObra(obra) {
   params.append("casas", obra.casas);
   params.append("activo", obra.activo);
 
-  return axios.post(`/api/obras-edit/${obra.id}`, params);
+  return axios.put(`/api/obras/${obra.id}`, params);
+}
+
+/**
+ *
+ * @returns Promise
+ */
+export function getAllActive() {
+  return axios.get("/api/obras?activo=true");
 }

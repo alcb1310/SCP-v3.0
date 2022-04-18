@@ -30,6 +30,15 @@ class PartidaRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getAllNoAcumula()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.acumula = false')
+            ->addOrderBy('p.codigo')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Partida[] Returns an array of Partida objects
     //  */

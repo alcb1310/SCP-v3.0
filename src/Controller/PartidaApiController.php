@@ -25,7 +25,7 @@ class PartidaApiController extends AbstractController
         );
 
         $partidaArray = $this->makeArray($partidas);
-       
+
         $adapter = new ArrayAdapter($partidaArray);
         $pagerfanta = new Pagerfanta($adapter);
 
@@ -76,7 +76,17 @@ class PartidaApiController extends AbstractController
         return new JsonResponse($partidaArray);
     }
 
-    #[Route('/api/partidas-add', methods:'POST')]
+    #[Route('/api/partidas-no-acumula')]
+    public function getAllNoAcumula(PartidaRepository $partidaRepository): Response
+    {
+        $partidas = $partidaRepository->getAllNoAcumula();
+
+        $partidaArray = $this->makeArray($partidas);
+
+        return new JsonResponse($partidaArray);
+    }
+
+    #[Route('/api/partidas', methods:'POST')]
     public function add(Request $request, EntityManagerInterface $em, PartidaRepository $partidaRepository)
     {
         try{
@@ -106,7 +116,7 @@ class PartidaApiController extends AbstractController
 
     }
 
-    #[Route('/api/partidas-edit/{id}', methods:'POST')]
+    #[Route('/api/partidas/{id}', methods:'PUT')]
     public function edit($id, Request $request, PartidaRepository $partidaRepository, EntityManagerInterface $em)
     {
         $partida = $partidaRepository->findOneBy(['id' => $id]);
@@ -151,7 +161,7 @@ class PartidaApiController extends AbstractController
 
         return $error;
     }
-    
+
     /**
      * makeArray
      *

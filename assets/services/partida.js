@@ -30,6 +30,14 @@ export function getAllAcumula() {
 
 /**
  *
+ * @returns Promise
+ */
+export function getAllNoAcumula() {
+  return axios.get("/api/partidas-no-acumula");
+}
+
+/**
+ *
  * @param object partidas
  * @returns Promise
  */
@@ -41,7 +49,7 @@ export function add(partida) {
   params.append("nivel", partida.nivel);
   params.append("padre", partida.padre);
 
-  return axios.post("/api/partidas-add", params);
+  return axios.post("/api/partidas", params);
 }
 
 /**
@@ -57,5 +65,5 @@ export function edit(partida) {
   params.append("nivel", partida.nivel);
   params.append("padre", partida.padre);
 
-  return axios.post(`/api/partidas-edit/${partida.id}`, params);
+  return axios.put(`/api/partidas/${partida.id}`, params);
 }

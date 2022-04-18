@@ -272,15 +272,12 @@ export default {
       try {
         if (this.method === 1) {
           const result = await addObra(this.selectedObra);
-          console.log(result);
           this.success = "Obra creada exitosamente";
         } else {
           const result = await editObra(this.selectedObra);
-          console.log(result);
           this.success = "Obra actualizada exitosamente";
         }
       } catch (err) {
-        console.error(err.response.data);
         this.error = err.response.data;
       }
       this.cargaDatos();

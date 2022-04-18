@@ -14,8 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ObraApiController extends AbstractController
 {
     #[Route('/api/obras', methods:'GET')]
-    public function getObras(ObraRepository $obraRepository): Response
+    public function getObras(Request $request, ObraRepository $obraRepository): Response
     {
+        if ($request->query->get('activo')) {
+            if ($request->query->get('activo') === 'true'){
+                $obras = $obraRepository->findBy(['activo' => true]);
+            } else {
+                $obras = $obraRepository->findBy(['activo' => false]);
+            }
+
+            return new JsonResponse($this->makeArray($obras));
+        }
         $obra = $obraRepository->findAll();
 
         return new JsonResponse($this->makeArray($obra));
@@ -30,7 +39,7 @@ class ObraApiController extends AbstractController
 
     }
 
-    #[Route('/api/obras-add', methods:'POST')]
+    #[Route('/api/obras', methods:'POST')]
     public function addObra(Request $request, ObraRepository $obraRepository, EntityManagerInterface $em): Response
     {
         if ($request->request->get('nombre') === ''){
@@ -41,7 +50,11 @@ class ObraApiController extends AbstractController
             $obra = new Obra();
             $obra->setNombre($request->request->get('nombre'));
             $obra->setCasas($request->request->get('casas'));
-            $obra->setActivo($request->request->get('activo'));
+            if($request->request->get('activo') === 'true'){
+                $obra->setActivo(true);
+            } else {
+                $obra->setActivo(false);
+            }
 
             $em->persist($obra);
             $em->flush();
@@ -55,7 +68,7 @@ class ObraApiController extends AbstractController
         }
     }
 
-    #[Route('/api/obras-edit/{id}')]
+    #[Route('/api/obras/{id}', methods:"PUT")]
     public function editObra($id, Request $request, ObraRepository $obraRepository, EntityManagerInterface $em): Response
     {
         if ($request->request->get('nombre') === ''){
@@ -67,7 +80,11 @@ class ObraApiController extends AbstractController
             $obra = $obraRepository->findOneBy(['id' => $id]);
             $obra->setNombre($request->request->get('nombre'));
             $obra->setCasas($request->request->get('casas'));
-            $obra->setActivo($request->request->get('activo'));
+            if($request->request->get('activo') === 'true'){
+                $obra->setActivo(true);
+            } else {
+                $obra->setActivo(false);
+            }
 
             $em->flush();
 
@@ -79,7 +96,7 @@ class ObraApiController extends AbstractController
             return new JsonResponse($error, 400);
         }
     }
-    
+
     /**
      * findReasons
      *
@@ -94,7 +111,7 @@ class ObraApiController extends AbstractController
         $data = $obraRepository->findOneBy(['nombre' => $nombre]);
         if ($data){
             $error['nombre'] = 'Nombre de obra ya existe';
-        }        
+        }
 
         if ($casas === 0){
             $error['casas'] = 'Numero de casas no puede ser 0';
@@ -102,7 +119,7 @@ class ObraApiController extends AbstractController
 
         return $error;
     }
-    
+
     /**
      * makeArrayFromOne
      *
@@ -123,7 +140,7 @@ class ObraApiController extends AbstractController
 
         return $helper;
     }
-    
+
     /**
      * makeArray
      *
