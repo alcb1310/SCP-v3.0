@@ -15,7 +15,7 @@
             v-model="selectedObra"
           >
             <option value="">--- Seleccione una obra ---</option>
-            <option v-for="obra in obras" :key="obra.id" value="obra.id">
+            <option v-for="obra in obras" :key="obra.id" :value="obra.id">
               {{ obra.nombre }}
             </option>
           </select>
@@ -36,7 +36,7 @@
             <option
               v-for="partida in partidas"
               :key="partida.id"
-              value="partida.id"
+              :value="partida.id"
             >
               {{ partida.nombre }}
             </option>
@@ -86,7 +86,7 @@
           />
         </div>
       </div>
-      <button class="btn btn-primary">Grabar</button>
+      <button class="btn btn-primary" @click="save">Grabar</button>
       <button class="btn btn-secondary" @click="closeModal">Cerrar</button>
     </div>
   </div>
@@ -95,12 +95,12 @@
 <script>
 import { getAllActive } from "../services/obra";
 import { getAllNoAcumula } from "../services/partida";
+import { addPresupuesto } from "../services/presupuesto";
 
 export default {
   name: "ModalPresupuesto",
   data() {
     return {
-      test: "working",
       obras: [],
       partidas: [],
       selectedObra: "",
@@ -128,6 +128,23 @@ export default {
   methods: {
     closeModal() {
       return this.$emit("cierraModal", false);
+    },
+
+    async save() {
+      const presupuesto = {
+        obra: this.selectedObra,
+        partida: this.selectedPartida,
+        cantidad: this.cantidad,
+        unitario: this.unitario,
+        total: this.cantidad * this.unitario,
+      };
+
+      try {
+        const saved = await addPresupuesto(presupuesto);
+        console.log(saved);
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
   computed: {

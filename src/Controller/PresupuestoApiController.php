@@ -47,9 +47,9 @@ class PresupuestoApiController extends AbstractController
 
     }
 
-
+    #[Route('/api/presupuestos', methods:"POST")]
     public function addPresupuesto(Request $request, ObraRepository $obraRepository, PartidaRepository $partidaRepository, PresupuestoRepository $presupuestoRepository, EntityManagerInterface $em) : Response
-    {   
+    {
         $obraCod = $request->request->get('obra');
         $partidaCod = $request->request->get('partida');
 
@@ -82,7 +82,7 @@ class PresupuestoApiController extends AbstractController
     }
 
 
-    
+
     /**
      * * Graba un presupuesto y actualiza todos los elementos padres
      *
@@ -95,7 +95,7 @@ class PresupuestoApiController extends AbstractController
     private function saveNewPresupuesto(Presupuesto $presupuesto, PartidaRepository $partidaRepository, PresupuestoRepository $presupuestoRepository, EntityManagerInterface $em)
     {
         $partida = $presupuesto->getPartida();
-        $em->beginTransaction(); 
+        $em->beginTransaction();
         try {
             $em->persist($presupuesto);
             $em->flush();
@@ -140,7 +140,7 @@ class PresupuestoApiController extends AbstractController
             throw new Exception($e->getMessage(), $e->getCode());
         }
     }
-    
+
     /**
      * makeArrayFromOne
      *
@@ -171,7 +171,7 @@ class PresupuestoApiController extends AbstractController
 
         return $array;
     }
-    
+
     /**
      * makeArray
      *
