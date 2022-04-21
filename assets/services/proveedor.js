@@ -16,7 +16,6 @@ export function getAllProveedores(page) {
  * @returns Promise
  */
 export function getProveedor(id) {
-  console.log(id);
   return axios.get(`/api/proveedores/${id}`);
 }
 

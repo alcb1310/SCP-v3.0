@@ -30,13 +30,7 @@
     <resetea-contrasena v-if="selectedMenu === 'resetea_contrasena'" />
     <!-- Usuarios end -->
   </div>
-  <img
-    src="/images/implantacion.webp"
-    alt="Implantacion Cantagua II"
-    class="responsive"
-    :width="max_width"
-    v-else
-  />
+  <div class="box" v-else></div>
 </template>
 
 <script>
@@ -112,3 +106,15 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+.box{
+  height: 500px;
+  width: 800px;
+  border: 1px solid black;
+  margin: 0 auto;
+  background: url('../images/implantacion.webp');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+</style>
